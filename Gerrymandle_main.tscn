@@ -1,0 +1,41 @@
+[gd_scene format=3 uid="uid://k0k2lmvojdl4"]
+
+[ext_resource type="Texture2D" uid="uid://bh0cfbnyduj4q" path="res://Assets/TempSelectIcon.png" id="1_0nwao"]
+[ext_resource type="Script" uid="uid://s6rds6w0mi5o" path="res://gerrymandle_main.gd" id="1_8j23a"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_md6oo"]
+font_size = 54
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_8j23a"]
+load_path = "res://.godot/imported/TempDeselectIcon.png-3916be6140d9f5cfd02705a349d14c24.ctex"
+
+[node name="Node2D" type="Node2D" unique_id=1465181450]
+script = ExtResource("1_8j23a")
+
+[node name="Title" type="Label" parent="." unique_id=672038702]
+offset_left = -1.0
+offset_right = 1152.0
+offset_bottom = 86.0
+text = "Gerrymandle"
+label_settings = SubResource("LabelSettings_md6oo")
+horizontal_alignment = 1
+
+[node name="Select Button" type="TextureButton" parent="." unique_id=1794684863]
+offset_left = 40.0
+offset_top = 257.0
+offset_right = 130.0
+offset_bottom = 346.0
+texture_normal = ExtResource("1_0nwao")
+stretch_mode = 0
+
+[node name="Deselect Button" type="TextureButton" parent="." unique_id=1677687333]
+offset_left = 46.0
+offset_top = 399.0
+offset_right = 124.0
+offset_bottom = 468.0
+texture_normal = SubResource("CompressedTexture2D_8j23a")
+stretch_mode = 0
+
+[connection signal="pressed" from="Select Button" to="." method="_on_select_button_pressed"]
+[connection signal="pressed" from="Deselect Button" to="." method="_on_deselect_button_pressed"]
