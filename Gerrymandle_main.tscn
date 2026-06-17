@@ -14,6 +14,13 @@ load_path = "res://.godot/imported/TempDeselectIcon.png-3916be6140d9f5cfd02705a3
 [sub_resource type="LabelSettings" id="LabelSettings_8j23a"]
 font_color = Color(0, 0, 0, 1)
 
+[sub_resource type="LabelSettings" id="LabelSettings_pddj4"]
+font_color = Color(0.96871156, 0.045175985, 0.40250045, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_10sit"]
+font_size = 20
+font_color = Color(0.8524706, 0.2275196, 0, 1)
+
 [node name="Node2D" type="Node2D" unique_id=1465181450]
 script = ExtResource("1_8j23a")
 
@@ -74,15 +81,30 @@ texture_normal = SubResource("CompressedTexture2D_8j23a")
 stretch_mode = 0
 
 [node name="Label" type="Label" parent="." unique_id=1487226610]
-offset_left = 498.0
-offset_top = 620.0
-offset_right = 636.0
-offset_bottom = 643.0
+offset_left = 472.0
+offset_top = 621.0
+offset_right = 610.0
+offset_bottom = 644.0
 text = "Make PURPLE win"
 label_settings = SubResource("LabelSettings_8j23a")
 
 [node name="District_Overlay" type="Node2D" parent="." unique_id=558114168]
 script = ExtResource("3_pddj4")
+
+[node name="Stopwatch" type="Label" parent="." unique_id=933723031]
+offset_left = 46.0
+offset_top = 561.0
+offset_right = 348.0
+offset_bottom = 627.0
+label_settings = SubResource("LabelSettings_pddj4")
+
+[node name="Label2" type="Label" parent="." unique_id=23953000]
+offset_left = 33.0
+offset_top = 507.0
+offset_right = 272.0
+offset_bottom = 567.0
+text = "Time elapsed:"
+label_settings = SubResource("LabelSettings_10sit")
 
 [connection signal="pressed" from="Select Button1" to="." method="_on_select_button_1_pressed"]
 [connection signal="pressed" from="Select Button1" to="." method="_on_select_button_pressed"]

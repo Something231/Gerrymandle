@@ -3,6 +3,7 @@ extends Node2D
 var x_cursor = load("res://Assets/TempDeselectIcon.png")
 var selection_cursor = load("res://Assets/TempSelectIcon.png")
 @onready var overlay = get_node("District_Overlay")
+@onready var stopwatch = get_node("Stopwatch")
 
 var mode: int = 1
 
@@ -18,6 +19,33 @@ const district_size_cap = 20
 const number_districts = floor((width*height) / district_size_cap)
 var district_sizes = []
 var current_selection:int = 0
+
+var time_elapsed: float = 0.0
+
+const winner: int = 1
+
+func check_completion() -> bool:
+	for i in district_sizes.size():
+		if district_sizes[i] != district_size_cap and i != 0:
+			print('not done')
+			return false
+	var district_totals = []
+	district_totals.resize(number_districts + 1)
+	district_totals.fill(0)
+	for y in range(height):
+		for x in range(height):
+			if grid[y][x] == winner:
+				district_totals[sgrid[y][x]] += 1
+	var tally = 0
+	for d in district_totals:
+		if d > floor(district_size_cap / 2):
+			tally += 1
+	if tally > floor(number_districts / 2):
+		print('your won')
+		return true
+	else:
+		print('fucked up')
+		return false
 
 func _draw() -> void:
 	for y in range(height):
@@ -61,7 +89,11 @@ func _process(delta: float) -> void:
 					district_sizes[mode] += 1
 					print("converted cell: " + str(cell_x) + str(cell_y) + " to: " + str(mode))
 	overlay.draw_overlay(sgrid)
-
+	time_elapsed += delta
+	stopwatch.text = str(time_elapsed)
+	var complete = check_completion()
+	if complete:
+		$Title.text = "You won"
 
 func _on_select_button_pressed() -> void:
 	Input.set_custom_mouse_cursor(selection_cursor)
