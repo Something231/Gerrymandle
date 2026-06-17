@@ -2,6 +2,7 @@ extends Node2D
 
 var x_cursor = load("res://Assets/TempDeselectIcon.png")
 var selection_cursor = load("res://Assets/TempSelectIcon.png")
+@onready var overlay = get_node("District_Overlay")
 
 var mode: int = 1
 
@@ -37,12 +38,12 @@ func _draw() -> void:
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	Input.set_custom_mouse_cursor(selection_cursor)
-	district_sizes.resize(number_districts)
+	district_sizes.resize(number_districts+1)
 	district_sizes.fill(0)
 	_draw()
-	pass # Replace with function body.
-
-
+	overlay.initialise_positions(width, height, l, h, 300, 100)
+	overlay.draw_overlay(sgrid)
+	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if Input.is_action_pressed('Left_click'):
@@ -50,14 +51,16 @@ func _process(delta: float) -> void:
 		if (300 < mouse_pos[0]) and (mouse_pos[0]) < (300+width*l) and (100 < mouse_pos[1]) and (mouse_pos[1]) < (100+height*h):
 			var cell_x = int(floor((mouse_pos[0]-300) / (l)))
 			var cell_y = int(floor((mouse_pos[1]-100) / (h)))
-			print(cell_x, cell_y)
-			if mode == 0:
+			if mode == 0 and sgrid[cell_y][cell_x] != 0:
 				district_sizes[sgrid[cell_y][cell_x]] -= 1
 				sgrid[cell_y][cell_x] = 0
-			elif sgrid[cell_y][cell_x] == 0 and district_sizes[mode] != district_size_cap:
+				print("erased cell: " + str(cell_x) + str(cell_y))
+			elif sgrid[cell_y][cell_x] == 0 and district_sizes[mode] != district_size_cap and mode != 0:
 				if district_sizes[mode] == 0 or (cell_x != 0 and sgrid[cell_y][cell_x-1] == mode) or (cell_y != 0 and sgrid[cell_y-1][cell_x] == mode) or (cell_x != (width-1) and sgrid[cell_y][cell_x+1] == mode) or (cell_y != (height-1) and sgrid[cell_y+1][cell_x] == mode):
 					sgrid[cell_y][cell_x] = mode
 					district_sizes[mode] += 1
+					print("converted cell: " + str(cell_x) + str(cell_y) + " to: " + str(mode))
+	overlay.draw_overlay(sgrid)
 
 
 func _on_select_button_pressed() -> void:
