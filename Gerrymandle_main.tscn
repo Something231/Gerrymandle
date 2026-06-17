@@ -10,6 +10,9 @@ font_color = Color(0, 0, 0, 1)
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_8j23a"]
 load_path = "res://.godot/imported/TempDeselectIcon.png-3916be6140d9f5cfd02705a349d14c24.ctex"
 
+[sub_resource type="LabelSettings" id="LabelSettings_8j23a"]
+font_color = Color(0, 0, 0, 1)
+
 [node name="Node2D" type="Node2D" unique_id=1465181450]
 script = ExtResource("1_8j23a")
 
@@ -36,6 +39,14 @@ offset_right = 124.0
 offset_bottom = 468.0
 texture_normal = SubResource("CompressedTexture2D_8j23a")
 stretch_mode = 0
+
+[node name="Label" type="Label" parent="." unique_id=1487226610]
+offset_left = 498.0
+offset_top = 620.0
+offset_right = 636.0
+offset_bottom = 643.0
+text = "Make PURPLE win"
+label_settings = SubResource("LabelSettings_8j23a")
 
 [connection signal="pressed" from="Select Button" to="." method="_on_select_button_pressed"]
 [connection signal="pressed" from="Deselect Button" to="." method="_on_deselect_button_pressed"]
