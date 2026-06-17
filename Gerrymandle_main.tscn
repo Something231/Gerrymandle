@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://bh0cfbnyduj4q" path="res://Assets/TempSelectIcon.png" id="1_0nwao"]
 [ext_resource type="Script" uid="uid://s6rds6w0mi5o" path="res://gerrymandle_main.gd" id="1_8j23a"]
+[ext_resource type="Script" uid="uid://djowbfe3wdwja" path="res://district_overlay.gd" id="3_pddj4"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_md6oo"]
 font_size = 54
@@ -24,19 +25,51 @@ text = "Gerrymandle"
 label_settings = SubResource("LabelSettings_md6oo")
 horizontal_alignment = 1
 
-[node name="Select Button" type="TextureButton" parent="." unique_id=1794684863]
-offset_left = 40.0
-offset_top = 257.0
-offset_right = 130.0
-offset_bottom = 346.0
+[node name="Select Button1" type="TextureButton" parent="." unique_id=1794684863]
+offset_left = 1034.0
+offset_top = 499.0
+offset_right = 1124.0
+offset_bottom = 588.0
+texture_normal = ExtResource("1_0nwao")
+stretch_mode = 0
+
+[node name="Select Button2" type="TextureButton" parent="." unique_id=1553043355]
+offset_left = 1034.0
+offset_top = 377.0
+offset_right = 1124.0
+offset_bottom = 466.0
+texture_normal = ExtResource("1_0nwao")
+stretch_mode = 0
+
+[node name="Select Button3" type="TextureButton" parent="." unique_id=1931422307]
+offset_left = 1037.0
+offset_top = 250.0
+offset_right = 1127.0
+offset_bottom = 339.0
+texture_normal = ExtResource("1_0nwao")
+stretch_mode = 0
+
+[node name="Select Button4" type="TextureButton" parent="." unique_id=978443454]
+offset_left = 1030.0
+offset_top = 135.0
+offset_right = 1120.0
+offset_bottom = 224.0
+texture_normal = ExtResource("1_0nwao")
+stretch_mode = 0
+
+[node name="Select Button5" type="TextureButton" parent="." unique_id=1688514241]
+offset_left = 1035.0
+offset_top = 18.0
+offset_right = 1125.0
+offset_bottom = 107.0
 texture_normal = ExtResource("1_0nwao")
 stretch_mode = 0
 
 [node name="Deselect Button" type="TextureButton" parent="." unique_id=1677687333]
-offset_left = 46.0
-offset_top = 399.0
-offset_right = 124.0
-offset_bottom = 468.0
+offset_left = 915.0
+offset_top = 11.0
+offset_right = 993.0
+offset_bottom = 80.0
 texture_normal = SubResource("CompressedTexture2D_8j23a")
 stretch_mode = 0
 
@@ -48,5 +81,17 @@ offset_bottom = 643.0
 text = "Make PURPLE win"
 label_settings = SubResource("LabelSettings_8j23a")
 
-[connection signal="pressed" from="Select Button" to="." method="_on_select_button_pressed"]
+[node name="District_Overlay" type="Node2D" parent="." unique_id=558114168]
+script = ExtResource("3_pddj4")
+
+[connection signal="pressed" from="Select Button1" to="." method="_on_select_button_1_pressed"]
+[connection signal="pressed" from="Select Button1" to="." method="_on_select_button_pressed"]
+[connection signal="pressed" from="Select Button2" to="." method="_on_select_button_2_pressed"]
+[connection signal="pressed" from="Select Button2" to="." method="_on_select_button_pressed"]
+[connection signal="pressed" from="Select Button3" to="." method="_on_select_button_3_pressed"]
+[connection signal="pressed" from="Select Button3" to="." method="_on_select_button_pressed"]
+[connection signal="pressed" from="Select Button4" to="." method="_on_select_button_4_pressed"]
+[connection signal="pressed" from="Select Button4" to="." method="_on_select_button_pressed"]
+[connection signal="pressed" from="Select Button5" to="." method="_on_select_button_5_pressed"]
+[connection signal="pressed" from="Select Button5" to="." method="_on_select_button_pressed"]
 [connection signal="pressed" from="Deselect Button" to="." method="_on_deselect_button_pressed"]

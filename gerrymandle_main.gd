@@ -2,7 +2,8 @@ extends Node2D
 
 var x_cursor = load("res://Assets/TempDeselectIcon.png")
 var selection_cursor = load("res://Assets/TempSelectIcon.png")
-var mode = true
+
+var mode: int = 1
 
 const width = 10
 const height = 10
@@ -12,6 +13,9 @@ const h = 50
 var grid = []
 
 var sgrid = []
+const district_size_cap = 20 
+const number_districts = floor((width*height) / district_size_cap)
+var district_sizes = []
 var current_selection:int = 0
 
 func _draw() -> void:
@@ -21,7 +25,7 @@ func _draw() -> void:
 		for x in range(width):
 			var p = 0 if randf() < 0.5 else 1
 			row.append(p)
-			row.append(0)
+			srow.append(0)
 			var colour = Color.REBECCA_PURPLE if p == 1 else Color.CYAN
 			var rect = Rect2(l*x+300, h*y+100, l, h)
 			draw_rect(rect, colour)
@@ -33,6 +37,8 @@ func _draw() -> void:
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	Input.set_custom_mouse_cursor(selection_cursor)
+	district_sizes.resize(number_districts)
+	district_sizes.fill(0)
 	_draw()
 	pass # Replace with function body.
 
@@ -45,13 +51,39 @@ func _process(delta: float) -> void:
 			var cell_x = int(floor((mouse_pos[0]-300) / (l)))
 			var cell_y = int(floor((mouse_pos[1]-100) / (h)))
 			print(cell_x, cell_y)
+			if mode == 0:
+				district_sizes[sgrid[cell_y][cell_x]] -= 1
+				sgrid[cell_y][cell_x] = 0
+			elif sgrid[cell_y][cell_x] == 0 and district_sizes[mode] != district_size_cap:
+				if district_sizes[mode] == 0 or (cell_x != 0 and sgrid[cell_y][cell_x-1] == mode) or (cell_y != 0 and sgrid[cell_y-1][cell_x] == mode) or (cell_x != (width-1) and sgrid[cell_y][cell_x+1] == mode) or (cell_y != (height-1) and sgrid[cell_y+1][cell_x] == mode):
+					sgrid[cell_y][cell_x] = mode
+					district_sizes[mode] += 1
 
 
 func _on_select_button_pressed() -> void:
 	Input.set_custom_mouse_cursor(selection_cursor)
-	mode = true
 
 
 func _on_deselect_button_pressed() -> void:
 	Input.set_custom_mouse_cursor(x_cursor)
-	mode = false
+	mode = 0
+
+
+func _on_select_button_5_pressed() -> void:
+	mode = 5
+
+
+func _on_select_button_4_pressed() -> void:
+	mode = 4
+
+
+func _on_select_button_3_pressed() -> void:
+	mode = 3
+
+
+func _on_select_button_2_pressed() -> void:
+	mode = 2
+
+
+func _on_select_button_1_pressed() -> void:
+	mode = 1
